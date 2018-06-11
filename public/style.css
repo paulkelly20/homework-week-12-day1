@@ -6,7 +6,15 @@
 .red-quote{
   color: red;
 }
+body{
+  background-color: lightblue;
+}
 
 img{
   width: 500px;
+}
+
+.cat {
+  display: block;
+  box-sizing: border-box;
 }
