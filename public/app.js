@@ -7,47 +7,53 @@ var app = function() {
   cats = [max,barnaby, boba]
   for(cat of cats){
     addCat(cat.name, cat.favouriteFood, cat.img)
-  }
+  };
+
   addCat("Sam", "Salmon", 'https://i.ytimg.com/vi/YCaGYUIfdy4/maxresdefault.jpg');
 };
 
 var addCat = function(name, favouriteFood, img){
-  var createCat = createCatList();
   var gotName = catName(name);
   var gotFood = catFood(favouriteFood);
   var newcatImg = catImg(img);
-  var ul = document.querySelector('.cat')
-  var li = document.createElement("li");
-  appendElements(gotName, gotFood, newcatImg, ul, li)
+
+  appendElements(gotName, gotFood, newcatImg)
 };
 
-var createCatList = function(){
-  var cat = document.createElement("ul");
-  cat.classList.add("cat");
-  return cat;
-};
 
 var catName = function(inputtedName){
   var name = document.createElement("li");
-  name.textContent = inputtedName;
+  name.textContent = "Name: " + inputtedName;
   return name
 };
 var catFood = function(inputtedFavouriteFood){
   var food = document.createElement("li");
-  food.textContent = inputtedFavouriteFood;
+  food.textContent = "Favourite food:" + inputtedFavouriteFood;
   return food
 };
 var catImg = function(inputtedImg){
   var img = document.createElement("li");
-  img.innerHTML = "<img src=\"" + inputtedImg + "\"/>";
+
+  // adding tag using innerHTML but not advised
+  // img.innerHTML = "<img src=\"" + inputtedImg + "\"/>";
+
+  var imageTag = document.createElement("img");
+  imageTag.width = "500";
+  imageTag.src = inputtedImg;
+  img.appendChild(imageTag);
   return img
 };
 
-var appendElements = function(catName, catFood, catImg, ul, li){
-  li.appendChild(catName);
-  li.appendChild(catFood);
-  li.appendChild(catImg);
-  ul.appendChild(li);
+var appendElements = function(catName, catFood, catImg){
+  // var ul = document.querySelector('.cat')
+  // var li = document.createElement("li");
+  var catList = document.createElement("ul");
+  catList.classList.add("cat")
+  catList.appendChild(catName);
+  catList.appendChild(catFood);
+  catList.appendChild(catImg);
+  var container =  document.querySelector('.cat')
+  container.appendChild(catList);
 };
 
 window.onload = app;
